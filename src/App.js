@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 function App() {
   return (
     <div className="App">
@@ -40,6 +42,24 @@ const questions = [
   },
 ];
 
-function Flashcards() {}
+function Flashcards() {
+  const [active, setActive] = useState(null);
+
+  return (
+    <div className="flashcards">
+      {questions.map((q) => (
+        <div
+          key={q.id}
+          className={active === q.id ? 'selected' : ''}
+          onClick={() => {
+            setActive(q.id !== active ? q.id : null);
+          }}
+        >
+          <p>{active === q.id ? q.answer : q.question}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default App;
